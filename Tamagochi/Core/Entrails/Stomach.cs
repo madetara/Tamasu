@@ -4,5 +4,10 @@ namespace Tamagochi.Core.Entrails
     {
         public int fulness;
         //public Meal lastMeal;
+
+        public Stomach()
+        {
+            fulness = 5;
+        }
     }
 }
