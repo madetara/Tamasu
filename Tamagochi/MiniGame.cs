@@ -10,6 +10,9 @@ namespace Tamagochi
         public int score;
         public int time;
 
+        private int cursorX;
+        private int cursorY;
+
         public Timer timer;
 
         public int Play()
@@ -35,8 +38,9 @@ namespace Tamagochi
         {
             if (time >= 0)
             {
-                Console.SetCursorPosition(10, 0);
+                Console.SetCursorPosition(0, 10);
                 Console.WriteLine($"Time {time}");
+                Console.SetCursorPosition(10, 11);
                 time -= 1;
             }
         }
@@ -45,6 +49,7 @@ namespace Tamagochi
         {
             var x = rand.Next(0, 10);
             var y = rand.Next(0, 10);
+            Console.SetCursorPosition(0, 11);
             Console.WriteLine($"{x} + {y} = ");
             var answer = int.Parse(Console.ReadLine());
             if (answer == x + y) score++;
