@@ -64,6 +64,8 @@ namespace Tamagochi
             Console.SetCursorPosition(40, cursorPositionY);
             var command = Console.ReadLine();
             var parsed = command.Split(new[] {' '}, StringSplitOptions.RemoveEmptyEntries);
+            if (parsed.Length < 1)
+                return;
             switch (parsed[0])
             {
                 case "eat":
@@ -74,6 +76,8 @@ namespace Tamagochi
                     break;
                 case "learn":
                     student.Learn();
+                    break;
+                default:
                     break;
             }
             cursorPositionY += 1;
