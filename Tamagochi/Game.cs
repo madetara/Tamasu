@@ -23,7 +23,7 @@ namespace Tamagochi
         {
             Console.WriteLine("Введите имя: ");
             student = new Student(Console.ReadLine());
-            mainTimer = new Timer(10000);
+            mainTimer = new Timer(10);
             mainTimer.Elapsed += OnTimeEvent;
             GameStart();
         }
@@ -45,8 +45,14 @@ namespace Tamagochi
             while (true)
             {
                 ReadCommand();
-                Thread.Sleep(5000);
+                Thread.Sleep(500);
                 student.ShowInfo();
+                if (!student.IsAlive())
+                {
+                    Console.WriteLine("\nYOU ARE ALREADY DEAD");
+                    mainTimer.Stop();
+                    break;
+                }
             }
         }
 
@@ -67,6 +73,9 @@ namespace Tamagochi
                     break;
                 case "learn":
                     student.Learn();
+                    break;
+                case "die":
+                    student.Die();
                     break;
                 default:
                     break;
