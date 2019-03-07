@@ -3,6 +3,7 @@ using System.Threading;
 using System.Timers;
 using Tamagochi.Core;
 using Tamagochi.UI;
+
 using Timer = System.Timers.Timer;
 
 namespace Tamagochi
@@ -19,24 +20,29 @@ namespace Tamagochi
 
         private static bool isSessionOn;
 
-        static Game()
-        {
-            Console.WriteLine("Введите имя: ");
-            student = new Student(Console.ReadLine());
-            mainTimer = new Timer(10);
-            mainTimer.Elapsed += OnTimeEvent;
-            GameStart();
-        }
+        public static int cursorPositionY = 0;
 
         private static void OnTimeEvent(object source, ElapsedEventArgs e)
         {
             days++;
             student.Suffer(1);
+            student.ShowInfo();
+        }
+
+        static Game()
+        {
+            Instructions.GetInstructions();
+            Console.WriteLine("Введите имя: ");
+            student = new Student(Console.ReadLine());
+            mainTimer.Elapsed += OnTimeEvent;
+            GameStart();
         }
 
         public static void GameStart()
         {
             mainTimer.Start();
+            Console.SetCursorPosition(40, 0);
+            student.ShowInfo();
             MainCycle();
         }
 
@@ -59,6 +65,8 @@ namespace Tamagochi
         private static void ReadCommand()
         {
             Console.WriteLine("Введи команду: ");
+            cursorPositionY += 1;
+            Console.SetCursorPosition(40, cursorPositionY);
             var command = Console.ReadLine();
             var parsed = command.Split(new[] {' '}, StringSplitOptions.RemoveEmptyEntries);
             if (parsed.Length < 1)
@@ -80,6 +88,8 @@ namespace Tamagochi
                 default:
                     break;
             }
+            cursorPositionY += 1;
+            student.ShowInfo();
         }
     }
 }
