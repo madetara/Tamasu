@@ -34,8 +34,6 @@ namespace Tamagochi
             Instructions.GetInstructions();
             Console.WriteLine("Введите имя: ");
             student = new Student(Console.ReadLine());
-            Console.Clear();
-            mainTimer = new Timer(1000);
             mainTimer.Elapsed += OnTimeEvent;
             GameStart();
         }
@@ -53,12 +51,19 @@ namespace Tamagochi
             while (true)
             {
                 ReadCommand();
-                Thread.Sleep(5000);                
+                Thread.Sleep(500);
+                student.ShowInfo();
+                if (!student.IsAlive())
+                {
+                    Console.WriteLine("\nYOU ARE ALREADY DEAD");
+                    mainTimer.Stop();
+                    break;
+                }
             }
         }
 
         private static void ReadCommand()
-        {            
+        {
             Console.WriteLine("Введи команду: ");
             cursorPositionY += 1;
             Console.SetCursorPosition(40, cursorPositionY);
@@ -76,6 +81,9 @@ namespace Tamagochi
                     break;
                 case "learn":
                     student.Learn();
+                    break;
+                case "die":
+                    student.Die();
                     break;
                 default:
                     break;

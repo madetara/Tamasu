@@ -42,6 +42,11 @@ namespace Tamagochi.Core
             soul.happiness += point;
         }
 
+        public void Die()
+        {
+            stomach.fulness = -1000000;
+        }
+
         public bool IsAlive()
         {
             return soul.happiness > 0
