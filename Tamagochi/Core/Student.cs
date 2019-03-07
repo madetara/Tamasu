@@ -73,16 +73,19 @@ namespace Tamagochi.Core
 
         public void ShowInfo()
         {
-            Console.SetCursorPosition(30, 2);
+            const int XCord = 0;
+            
+            Console.SetCursorPosition(XCord, 0);
             Console.Write("Состояние студента " + name + ":");
-            Console.SetCursorPosition(30, 3);
+            Console.SetCursorPosition(XCord, 1);
             Console.Write("Сытость: " + stomach.fulness);
-            Console.SetCursorPosition(30, 4);
+            Console.SetCursorPosition(XCord, 2);
             Console.Write("Интеллект: " + brain.intellect);
-            Console.SetCursorPosition(30, 5);
+            Console.SetCursorPosition(XCord, 3);
             Console.Write("Счастье: " + soul.happiness);
-            Console.SetCursorPosition(30, 6);
+            Console.SetCursorPosition(XCord, 4);
             Console.Write("Живой: " + (IsAlive() ? "да" : "нет"));
+            Console.SetCursorPosition(40, Game.cursorPositionY);
         }
     }
 }
