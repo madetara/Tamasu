@@ -55,6 +55,8 @@ namespace Tamagochi
             Console.WriteLine("Введи команду: ");
             var command = Console.ReadLine();
             var parsed = command.Split(new[] {' '}, StringSplitOptions.RemoveEmptyEntries);
+            if (parsed.Length < 1)
+                return;
             switch (parsed[0])
             {
                 case "eat":
@@ -65,6 +67,8 @@ namespace Tamagochi
                     break;
                 case "learn":
                     student.Learn();
+                    break;
+                default:
                     break;
             }
         }
