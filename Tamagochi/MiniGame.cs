@@ -9,7 +9,6 @@ namespace Tamagochi
 
         public int score;
         public int time;
-
         public Timer timer;
 
         public int Play()

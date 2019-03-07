@@ -7,10 +7,10 @@ namespace Tamagochi.Core
     public class Student
     {
         private readonly Brain brain;
-        private int course;
         private readonly string name;
         private readonly Soul soul;
         private readonly Stomach stomach;
+        private int course;
 
         public Student(string name)
         {
