@@ -3,6 +3,7 @@ using System.Threading;
 using System.Timers;
 using Tamagochi.Core;
 using Tamagochi.UI;
+
 using Timer = System.Timers.Timer;
 
 namespace Tamagochi
@@ -21,6 +22,7 @@ namespace Tamagochi
 
         static Game()
         {
+            Instructions.GetInstructions();
             Console.WriteLine("Введите имя: ");
             student = new Student(Console.ReadLine());
             mainTimer = new Timer(10000);
