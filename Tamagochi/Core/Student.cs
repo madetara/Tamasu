@@ -73,19 +73,20 @@ namespace Tamagochi.Core
 
         public void ShowInfo()
         {
-            const int XCord = 0;
-            
-            Console.SetCursorPosition(XCord, 0);
-            Console.Write("Состояние студента " + name + ":");
-            Console.SetCursorPosition(XCord, 1);
-            Console.Write("Сытость: " + stomach.fulness);
-            Console.SetCursorPosition(XCord, 2);
-            Console.Write("Интеллект: " + brain.intellect);
-            Console.SetCursorPosition(XCord, 3);
-            Console.Write("Счастье: " + soul.happiness);
-            Console.SetCursorPosition(XCord, 4);
-            Console.Write("Живой: " + (IsAlive() ? "да" : "нет"));
-            Console.SetCursorPosition(40, Game.cursorPositionY);
+            var t_cl = Console.CursorLeft;
+            var t_ct = Console.CursorTop;
+
+            Game.ConsoleUI.Clear("StudentInfo");
+            //Game.ConsoleUI.SwitchBox("StudentInfo");
+
+            Game.ConsoleUI.WriteLine("StudentInfo", "Состояние студента " + name + ":");
+            Game.ConsoleUI.WriteLine("StudentInfo", "Сытость: " + stomach.fulness);
+            Game.ConsoleUI.WriteLine("StudentInfo", "Интеллект: " + brain.intellect);
+            Game.ConsoleUI.WriteLine("StudentInfo", "Счастье: " + soul.happiness);
+            Game.ConsoleUI.WriteLine("StudentInfo", "Живой: " + (IsAlive() ? "да" : "нет"));
+
+            //Console.SetCursorPosition(40, Game.cursorPositionY);
+            //Console.SetCursorPosition(t_cl, t_ct);
         }
     }
 }

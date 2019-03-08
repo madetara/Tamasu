@@ -22,6 +22,8 @@ namespace Tamagochi
 
         public static int cursorPositionY = 0;
 
+        public static ConsoleBox.ConsoleOutput ConsoleUI;
+
         private static void OnTimeEvent(object source, ElapsedEventArgs e)
         {
             days++;
@@ -43,7 +45,7 @@ namespace Tamagochi
         public static void GameStart()
         {
             mainTimer.Start();
-            Console.SetCursorPosition(40, 0);
+            ConsoleUIInit();
             student.ShowInfo();
             MainCycle();
         }
@@ -53,17 +55,16 @@ namespace Tamagochi
             while (true)
             {
                 ReadCommand();
-                Thread.Sleep(5000);                
+                Thread.Sleep(5000);
             }
         }
 
         private static void ReadCommand()
-        {            
-            Console.WriteLine("Введи команду: ");
-            cursorPositionY += 1;
-            Console.SetCursorPosition(40, cursorPositionY);
-            var command = Console.ReadLine();
-            var parsed = command.Split(new[] {' '}, StringSplitOptions.RemoveEmptyEntries);
+        {
+            ConsoleUI.WriteLine("MainInput", "Введи команду: ");
+            //Console.SetCursorPosition(40, cursorPositionY);
+            var command = ConsoleUI.ReadLine("MainInput");
+            var parsed = command.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
             if (parsed.Length < 1)
                 return;
             switch (parsed[0])
@@ -82,6 +83,15 @@ namespace Tamagochi
             }
             cursorPositionY += 1;
             student.ShowInfo();
+        }
+
+        private static void ConsoleUIInit()
+        {
+            ConsoleUI = new ConsoleBox.ConsoleOutput();
+            ConsoleUI.AddBox("MainInput", new ConsoleBox(40, 0, 30, 100));
+            ConsoleUI.AddBox("StudentInfo", new ConsoleBox(0, 2, 30, 7));
+            ConsoleUI.AddBox("MiniGameInfo", new ConsoleBox(0, 12, 30, 10));
+            ConsoleUI.SwitchBox("MainInput");
         }
     }
 }
