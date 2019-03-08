@@ -21,14 +21,14 @@ namespace Tamagochi
             timer.Elapsed += OnTimedEvent;
             time = 10;
             timer.Start();
-            Console.SetCursorPosition(0, 8);
+            Game.ConsoleUI.Clear("MiniGameInfo");
             for (var i = 0; i < 5; i++)
             {
                 if (time == 0) break;
                 PlayRound();
             }
 
-            Console.WriteLine($"Score {score}");
+            Game.ConsoleUI.WriteLine("MiniGameInfo", $"Score {score}");
             timer.Stop();
 
             return score;
@@ -51,8 +51,8 @@ namespace Tamagochi
         {
             var x = rand.Next(0, 10);
             var y = rand.Next(0, 10);
-            Console.Write($"{x} + {y} = ");
-            var answer = int.Parse(Console.ReadLine());
+            Game.ConsoleUI.Write("MiniGameInfo", $"{x} + {y} = ");
+            var answer = int.Parse(Game.ConsoleUI.ReadLine("MiniGameInfo"));
             if (answer == x + y) score++;
         }
     }
